@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pakistani University Aggregate & GPA Calculator</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7f6;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            width: 100%;
+            max-width: 480px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            color: #1e293b;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        p.subtitle {
+            text-align: center;
+            font-size: 0.88rem;
+            color: #64748b;
+            margin-bottom: 24px;
+        }
+
+        .input-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #475569;
+        }
+
+        .row {
+            display: flex;
+            gap: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+        }
+
+        .result-box {
+            margin-top: 24px;
+            padding: 20px;
+            background-color: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .result-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #64748b;
+            margin-bottom: 6px;
+        }
+
+        .result-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #2563eb;
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Aggregate Calculator</h1>
+    <p class="subtitle">Quick calculation for university admissions</p>
+
+    <form id="calcForm">
+        <!-- Matriculation -->
+        <div class="input-group">
+            <label>Matric Marks (Weightage: 10%)</label>
+            <div class="row">
+                <input type="number" id="matricObtained" placeholder="Obtained" oninput="calculate()">
+                <input type="number" id="matricTotal" placeholder="Total (1100)" value="1100" oninput="calculate()">
+            </div>
+        </div>
+
+        <!-- FSc / Intermediate -->
+        <div class="input-group">
+            <label>FSc / Inter Marks (Weightage: 40%)</label>
+            <div class="row">
+                <input type="number" id="fscObtained" placeholder="Obtained" oninput="calculate()">
+                <input type="number" id="fscTotal" placeholder="Total (1100)" value="1100" oninput="calculate()">
+            </div>
+        </div>
+
+        <!-- Entry Test -->
+        <div class="input-group">
+            <label>Entry Test Marks (Weightage: 50%)</label>
+            <div class="row">
+                <input type="number" id="testObtained" placeholder="Obtained" oninput="calculate()">
+                <input type="number" id="testTotal" placeholder="Total (100)" value="100" oninput="calculate()">
+            </div>
+        </div>
+    </form>
+
+    <div class="result-box">
+        <div class="result-title">Your Final Aggregate</div>
+        <div class="result-value" id="finalResult">0.00%</div>
+    </div>
+
+    <footer>Free Online Calculator • No Login Required</footer>
+</div>
+
+<script>
+    function calculate() {
+        // Matric
+        const mObt = parseFloat(document.getElementById('matricObtained').value) || 0;
+        const mTot = parseFloat(document.getElementById('matricTotal').value) || 1;
+        
+        // FSc
+        const fObt = parseFloat(document.getElementById('fscObtained').value) || 0;
+        const fTot = parseFloat(document.getElementById('fscTotal').value) || 1;
+        
+        // Entry Test
+        const tObt = parseFloat(document.getElementById('testObtained').value) || 0;
+        const tTot = parseFloat(document.getElementById('testTotal').value) || 1;
+
+        // Calculate Weighted Score (10% Matric, 40% FSc, 50% Entry Test)
+        const matricScore = (mObt / mTot) * 10;
+        const fscScore = (fObt / fTot) * 40;
+        const testScore = (tObt / tTot) * 50;
+
+        const totalAggregate = matricScore + fscScore + testScore;
+
+        document.getElementById('finalResult').innerText = totalAggregate.toFixed(2) + '%';
+    }
+</script>
+
+</body>
+</html>
