@@ -173,6 +173,8 @@
 
         document.getElementById('finalResult').innerText = totalAggregate.toFixed(2) + '%';
     }
+     function resetForm() { document.querySelectorAll('input').forEach(i => i.value = ''); document.getElementById('finalResult').innerText = '0.00%'; }
+
 </script>
 
 </body>
