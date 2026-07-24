@@ -5,27 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>University Merit Calculator - VectaStack HQ</title>
   
+  <!-- Google AdSense Script (Uncomment and replace ca-pub ID after approval) -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+
   <!-- Lottie Animation Engine Player -->
   <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@latest/dist/dotlottie-wc.js" type="module"></script>
 
   <style>
     * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     
-    /* Dark Theme Base Background */
     body {
       margin: 0;
       padding: 20px;
-      background-color: #0f172a; /* Deep Charcoal Blue */
+      background-color: #0f172a;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       color: #f8fafc;
     }
 
-    /* Dark Card Container */
+    /* Top Ad Slot Container */
+    .ad-slot-top {
+      width: 100%;
+      max-width: 440px;
+      margin-bottom: 15px;
+      background: #1e293b;
+      border: 1px dashed #334155;
+      border-radius: 8px;
+      min-height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #64748b;
+      font-size: 11px;
+    }
+
     .calc-card {
-      background-color: #1e293b; /* Slate Dark Box */
+      background-color: #1e293b;
       padding: 30px;
       border-radius: 16px;
       box-shadow: 0 20px 30px rgba(0,0,0,0.5);
@@ -109,7 +127,6 @@
       line-height: 1.4;
     }
 
-    /* Primary Action Button */
     .btn-calc {
       width: 100%;
       padding: 14px;
@@ -129,7 +146,6 @@
       background: linear-gradient(135deg, #0369a1, #075985);
     }
 
-    /* Dark Reset Button */
     .btn-reset {
       width: 100%;
       padding: 12px;
@@ -149,9 +165,22 @@
       color: #ffffff;
     }
 
-    /* Brand Footer */
+    /* In-Card Ad Slot */
+    .ad-slot-card {
+      margin-top: 15px;
+      background: #0f172a;
+      border: 1px dashed #334155;
+      border-radius: 8px;
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #64748b;
+      font-size: 11px;
+    }
+
     .brand-footer {
-      margin-top: 22px;
+      margin-top: 18px;
       font-size: 12px;
       color: #64748b;
       font-weight: 600;
@@ -164,7 +193,6 @@
       font-weight: 700;
     }
 
-    /* Modal Popup Overlay Dark */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -217,10 +245,9 @@
 
     .close-btn:hover { color: #ef4444; }
 
-    /* Animated Character Container Styling */
     .animation-wrapper {
-      width: 140px;
-      height: 140px;
+      width: 130px;
+      height: 130px;
       margin: 0 auto 10px auto;
       display: flex;
       justify-content: center;
@@ -275,28 +302,34 @@
 </head>
 <body>
 
+  <!-- Top Display Ad Unit -->
+  <div class="ad-slot-top">
+    <!-- Paste Google AdSense Banner Code Here -->
+    <span>ADVERTISEMENT BANNER SLOT</span>
+  </div>
+
   <div class="calc-card">
     <h2>University Merit Calculator</h2>
     
     <div class="input-group">
       <label for="courseSelect">Select Target Course / University Test:</label>
       <select id="courseSelect" class="custom-select" onchange="updateFormula()">
-        <option value="pieas">PIEAS Admission Test</option>
-        <option value="mdcat">MDCAT Medical</option>
         <option value="ecat">ECAT UET Engineering</option>
+        <option value="mdcat">MDCAT Medical</option>
         <option value="nust">NUST NET Test</option>
         <option value="fast">FAST-NUCES CS Test</option>
+        <option value="pieas">PIEAS Admission Test</option>
         <option value="comsats">COMSATS NTS-NAT</option>
       </select>
     </div>
 
     <div class="formula-badge" id="formulaText">
-      Formula: 15% Matric | 25% FSc | 60% PIEAS Test
+      Formula: 17% Matric | 50% FSc | 33% ECAT Test
     </div>
 
     <!-- Matric Inputs -->
     <div class="input-group">
-      <label id="lblMatric">Matric / O-Level Marks (15% Weightage):</label>
+      <label id="lblMatric">Matric / O-Level Marks (17% Weightage):</label>
       <div class="input-row">
         <input type="number" id="obtMatric" placeholder="Obtained">
         <input type="number" id="totMatric" placeholder="Total">
@@ -305,7 +338,7 @@
 
     <!-- FSc Inputs -->
     <div class="input-group">
-      <label id="lblFsc">FSc / A-Level Marks (25% Weightage):</label>
+      <label id="lblFsc">FSc / A-Level Marks (50% Weightage):</label>
       <div class="input-row">
         <input type="number" id="obtFsc" placeholder="Obtained">
         <input type="number" id="totFsc" placeholder="Total">
@@ -314,31 +347,32 @@
 
     <!-- Entry Test Inputs -->
     <div class="input-group">
-      <label id="lblTest">Entry Test Marks (60% Weightage):</label>
+      <label id="lblTest">Entry Test Marks (33% Weightage):</label>
       <div class="input-row">
         <input type="number" id="obtTest" placeholder="Obtained">
         <input type="number" id="totTest" placeholder="Total">
       </div>
     </div>
 
-    <!-- Main Action Button -->
     <button class="btn-calc" onclick="calculateAggregate()">Calculate Aggregate & Eligibility</button>
-
-    <!-- Reset Button -->
     <button class="btn-reset" onclick="resetForm()">Reset Form</button>
 
-    <!-- Brand Footer -->
+    <!-- In-Card Native Ad Unit -->
+    <div class="ad-slot-card">
+      <!-- Paste Google AdSense Square/Native Code Here -->
+      <span>NATIVE AD SLOT</span>
+    </div>
+
     <div class="brand-footer">
       Powered by <span>VectaStack HQ</span>
     </div>
   </div>
 
-  <!-- Popup Result Modal -->
+  <!-- Popup Modal -->
   <div class="modal-overlay" id="resultModal">
     <div class="modal-box">
       <span class="close-btn" onclick="closeModal()">&times;</span>
       
-      <!-- Dynamic Animated Character Render Slot -->
       <div class="animation-wrapper" id="animationSlot"></div>
 
       <h3 id="modalTitle">University Eligibility Result</h3>
@@ -346,7 +380,7 @@
       <div class="badge-percent" id="displayPercent">0.00%</div>
       <div class="merit-tier" id="meritTier"></div>
 
-      <p style="color: #94a3b8; font-size: 12px; margin-bottom: 8px;" id="subtitleText">Based on official closing merit trends, you can apply for:</p>
+      <p style="color: #94a3b8; font-size: 12px; margin-bottom: 8px;">Based on official closing merit trends, you can apply for:</p>
       
       <ul class="course-list" id="courseList"></ul>
     </div>
@@ -354,25 +388,24 @@
 
   <script>
     const formulas = {
-      pieas:   { matric: 0.15, fsc: 0.25, test: 0.60, name: "PIEAS Test" },
+      ecat:    { matric: 0.17, fsc: 0.50, test: 0.33, name: "ECAT Test" },
       mdcat:   { matric: 0.10, fsc: 0.40, test: 0.50, name: "MDCAT Test" },
-      ecat:    { matric: 0.10, fsc: 0.60, test: 0.30, name: "ECAT Test" },
       nust:    { matric: 0.10, fsc: 0.15, test: 0.75, name: "NET Test" },
       fast:    { matric: 0.10, fsc: 0.40, test: 0.50, name: "FAST Test" },
+      pieas:   { matric: 0.15, fsc: 0.25, test: 0.60, name: "PIEAS Test" },
       comsats: { matric: 0.10, fsc: 0.40, test: 0.50, name: "NTS Test" }
     };
 
-    // Vector Lottie Animation CDN Sources
-    const HAPPY_ANIMATION = "https://assets2.lottiefiles.com/packages/lf20_tou3y0bu.json"; // Happy celebrating trophy/character
-    const SAD_ANIMATION = "https://assets10.lottiefiles.com/packages/lf20_k239m99a.json";   <!-- Sad apologizing cartoon -->
+    const HAPPY_ANIMATION = "https://assets2.lottiefiles.com/packages/lf20_tou3y0bu.json"; 
+    const SAD_ANIMATION = "https://assets10.lottiefiles.com/packages/lf20_k239m99a.json";   
 
     function updateFormula() {
       const selected = document.getElementById('courseSelect').value;
       const config = formulas[selected];
 
-      const mPct = (config.matric * 100);
-      const fPct = (config.fsc * 100);
-      const tPct = (config.test * 100);
+      const mPct = (config.matric * 100).toFixed(0);
+      const fPct = (config.fsc * 100).toFixed(0);
+      const tPct = (config.test * 100).toFixed(0);
 
       document.getElementById('formulaText').innerText = `Formula: ${mPct}% Matric | ${fPct}% FSc | ${tPct}% ${config.name}`;
       document.getElementById('lblMatric').innerText = `Matric / O-Level Marks (${mPct}% Weightage):`;
@@ -408,17 +441,14 @@
       const modalTitle = document.getElementById('modalTitle');
       
       courseListUI.innerHTML = "";
-
       let eligibleCourses = [];
 
-      // Determine Eligibility & Render Character
       if (percentage >= 45) {
-        // PASS STATE (Happy Character)
         displayBadge.className = "badge-percent badge-pass";
         modalTitle.innerText = "Congratulations! 🎉";
         modalTitle.style.color = "#10b981";
 
-        animationSlot.innerHTML = `<dotlottie-wc src="${HAPPY_ANIMATION}" speed="1" style="width: 130px; height: 130px;" mode="forward" loop autoplay></dotlottie-wc>`;
+        animationSlot.innerHTML = `<dotlottie-wc src="${HAPPY_ANIMATION}" speed="1" style="width: 120px; height: 120px;" mode="forward" loop autoplay></dotlottie-wc>`;
 
         if (percentage >= 85) {
           meritTierUI.innerText = "🏆 Tier-1 Merit Bracket";
@@ -456,14 +486,13 @@
           ];
         }
       } else {
-        // FAIL STATE (Sad Apologetic Cartoon Character)
         displayBadge.className = "badge-percent badge-fail";
         modalTitle.innerText = "We're Sorry... 😔";
         modalTitle.style.color = "#ef4444";
         meritTierUI.innerText = "❌ Below Minimum 45% Threshold";
         meritTierUI.style.color = "#ef4444";
 
-        animationSlot.innerHTML = `<dotlottie-wc src="${SAD_ANIMATION}" speed="1" style="width: 130px; height: 130px;" mode="forward" loop autoplay></dotlottie-wc>`;
+        animationSlot.innerHTML = `<dotlottie-wc src="${SAD_ANIMATION}" speed="1" style="width: 120px; height: 120px;" mode="forward" loop autoplay></dotlottie-wc>`;
 
         eligibleCourses = [
           "⚠️ Aggregate score is below the 45% minimum criteria for degree admissions.",
@@ -500,6 +529,8 @@
         closeModal();
       }
     }
+
+    window.onload = updateFormula;
   </script>
 
 </body>
