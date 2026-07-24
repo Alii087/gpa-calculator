@@ -1,195 +1,477 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aggregate & GPA Calculator - Free Admissions Tool | VectaStack</title>
-<meta name="description" content="Calculate your university aggregate and entry test marks easily. A simple, free online admission calculator with no login required.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>University Merit & Aggregate Calculator</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+  <!-- CSS STYLES -->
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      margin: 0;
+      padding: 20px;
+      background-color: #f39c12; /* Brand Background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-        body {
-            background-color: #f4f7f6;
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
+    /* Main Container Card */
+    .calc-card {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 480px;
+      text-align: center;
+    }
 
-        .container {
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-            width: 100%;
-            max-width: 480px;
-        }
+    .calc-card h2 {
+      margin-top: 0;
+      color: #2c3e50;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
 
-        h1 {
-            font-size: 1.5rem;
-            color: #1e293b;
-            text-align: center;
-            margin-bottom: 8px;
-        }
+    /* Custom Dropdown Styling */
+    .select-label {
+      display: block;
+      text-align: left;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #34495e;
+      font-size: 13px;
+    }
 
-        p.subtitle {
-            text-align: center;
-            font-size: 0.88rem;
-            color: #64748b;
-            margin-bottom: 24px;
-        }
+    .custom-select {
+      width: 100%;
+      padding: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #ffffff;
+      background-color: #2c3e50;
+      border: none;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      outline: none;
+      cursor: pointer;
+    }
 
-        .input-group {
-            margin-bottom: 16px;
-        }
+    .custom-select optgroup {
+      background-color: #1a252f;
+      color: #f1c40f;
+      font-weight: bold;
+    }
 
-        label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: #475569;
-        }
+    .custom-select option {
+      background-color: #2c3e50;
+      color: #ffffff;
+    }
 
-        .row {
-            display: flex;
-            gap: 10px;
-        }
+    .formula-badge {
+      display: block;
+      background: #eef2f5;
+      color: #2c3e50;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      border: 1px solid #dcdde1;
+    }
 
-        input {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
-            font-size: 0.95rem;
-            outline: none;
-            transition: border-color 0.2s;
-        }
+    /* Form Fields */
+    .input-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
 
-        input:focus {
-            border-color: #2563eb;
-        }
+    .input-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #34495e;
+      font-size: 13px;
+    }
 
-        .result-box {
-            margin-top: 24px;
-            padding: 20px;
-            background-color: #f8fafc;
-            border: 2px dashed #cbd5e1;
-            border-radius: 8px;
-            text-align: center;
-        }
+    .input-row {
+      display: flex;
+      gap: 10px;
+    }
 
-        .result-title {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #64748b;
-            margin-bottom: 6px;
-        }
+    .input-row input {
+      width: 50%;
+      padding: 10px;
+      border: 2px solid #bdc3c7;
+      border-radius: 6px;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
 
-        .result-value {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #2563eb;
-        }
+    .input-row input:focus {
+      border-color: #2c3e50;
+    }
 
-        footer {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 0.75rem;
-            color: #94a3b8;
-        }
-    </style>
+    .btn-calc {
+      width: 100%;
+      padding: 14px;
+      background-color: #2c3e50;
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.2s;
+    }
+
+    .btn-calc:hover {
+      background-color: #1a252f;
+    }
+
+    /* Modal Popup Styling */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 1000;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-box {
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 500px;
+      max-height: 85vh;
+      overflow-y: auto;
+      text-align: center;
+      position: relative;
+      animation: popup 0.3s ease-out;
+    }
+
+    @keyframes popup {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #7f8c8d;
+      cursor: pointer;
+    }
+
+    .close-btn:hover { color: #e74c3c; }
+
+    .modal-box h3 {
+      margin-top: 0;
+      color: #2c3e50;
+      font-size: 22px;
+    }
+
+    .badge-percent {
+      display: inline-block;
+      background-color: #27ae60;
+      color: #ffffff;
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: 22px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .merit-tier {
+      font-size: 13px;
+      color: #e67e22;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .course-list {
+      text-align: left;
+      margin-top: 15px;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .course-list li {
+      background: #f8f9fa;
+      padding: 10px 14px;
+      margin-bottom: 8px;
+      border-left: 4px solid #27ae60;
+      border-radius: 4px;
+      font-weight: 600;
+      color: #2c3e50;
+      font-size: 13px;
+    }
+  </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Aggregate Calculator</h1>
-<p style="color: #64748b; font-size: 14px;">Quick aggregate & score calculation for college and university admissions worldwide</p>
+  <!-- CALCULATOR UI -->
+  <div class="calc-card">
+    <h2>University Merit Calculator</h2>
 
+    <span class="select-label">Select Target Course / University Test:</span>
+    <select id="courseSelect" class="custom-select" onchange="updateFormula()">
+      <optgroup label="🩺 Medical & Health Sciences">
+        <option value="mdcat" selected>MDCAT (Public MBBS / BDS)</option>
+        <option value="nums">NUMS Medical Test</option>
+        <option value="aku">Aga Khan University (AKU)</option>
+        <option value="pharm_d">Pharm-D / DPT / Allied Health</option>
+      </optgroup>
 
-    <form id="calcForm">
-        <!-- Matriculation -->
-        <div class="input-group">
-            <label>Matric Marks (Weightage: 10%)</label>
-            <div class="row">
-                <input type="number" id="matricObtained" placeholder="Obtained" oninput="calculate()">
-                <input type="number" id="matricTotal" placeholder="Total (1100)" value="1100" oninput="calculate()">
-            </div>
-        </div>
+      <optgroup label="⚙️ Engineering & Tech">
+        <option value="ecat">ECAT (UET Lahore / Punjab)</option>
+        <option value="net_engg">NET (NUST Engineering)</option>
+        <option value="giki">GIKI Entrance Test</option>
+        <option value="pieas">PIEAS Admission Test</option>
+        <option value="ned">NED Karachi / MUET / ETEA</option>
+      </optgroup>
 
-        <!-- FSc / Intermediate -->
-        <div class="input-group">
-            <label>FSc / Inter Marks (Weightage: 40%)</label>
-            <div class="row">
-                <input type="number" id="fscObtained" placeholder="Obtained" oninput="calculate()">
-                <input type="number" id="fscTotal" placeholder="Total (1100)" value="1100" oninput="calculate()">
-            </div>
-        </div>
+      <optgroup label="💻 Computing & IT">
+        <option value="fast_nu">FAST-NUCES (CS / SE / AI)</option>
+        <option value="pucit">PUCIT / FCIT Punjab University</option>
+        <option value="net_cs">NET (NUST Computing)</option>
+        <option value="comsats">COMSATS (NTS-NAT)</option>
+      </optgroup>
 
-        <!-- Entry Test -->
-        <div class="input-group">
-            <label>Entry Test Marks (Weightage: 50%)</label>
-            <div class="row">
-                <input type="number" id="testObtained" placeholder="Obtained" oninput="calculate()">
-                <input type="number" id="testTotal" placeholder="Total (100)" value="100" oninput="calculate()">
-            </div>
-        </div>
-        <button type="button" onclick="resetForm()" style="width: 100%; background-color: #64748b; color: white; padding: 14px; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 10px;">Reset</button>
+      <optgroup label="📊 Business & Law">
+        <option value="lums">LUMS (LCAT / SAT / ACT)</option>
+        <option value="iba">IBA Karachi Test</option>
+        <option value="net_business">NUST NET (Business & Social Sciences)</option>
+        <option value="hec_lat">HEC LAT (Law Admission Test)</option>
+      </optgroup>
 
+      <optgroup label="🎓 General & Others">
+        <option value="pu_test">Punjab University Test (PU-Test)</option>
+        <option value="nts_nat">NTS NAT (General Universities)</option>
+        <option value="uvas_uaf">UVAS / UAF (Veterinary & Agriculture)</option>
+      </optgroup>
+    </select>
 
-    </form>
+    <div class="formula-badge" id="formulaText">Formula: 10% Matric | 40% FSc | 50% Entry Test</div>
 
-    <div class="result-box">
-        <div class="result-title">Your Final Aggregate</div>
-        <div class="result-value" id="finalResult">0.00%</div>
+    <!-- MARKS INPUT FIELDS -->
+    <div class="input-group">
+      <label id="lblMatric">Matric / O-Level Marks (10% Weightage):</label>
+      <div class="input-row">
+        <input type="number" id="obtMatric" placeholder="Obtained">
+        <input type="number" id="totMatric" placeholder="Total (1100)">
+      </div>
     </div>
 
-    <footer style="text-align: center; margin-top: 24px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-  <p style="margin: 0; font-size: 13px; color: #64748b; font-weight: 400;">
-    Free Online Calculator • No Login Required
-  </p>
-  <p style="margin-top: 6px; font-size: 11.5px; color: #94a3b8; font-weight: 400; letter-spacing: 0.2px;">
-    Powered by <strong style="color: #1e293b; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; font-size: 11px;">VectaStack</strong>
-  </p>
-</footer>
+    <div class="input-group">
+      <label id="lblFsc">FSc / A-Level Marks (40% Weightage):</label>
+      <div class="input-row">
+        <input type="number" id="obtFsc" placeholder="Obtained">
+        <input type="number" id="totFsc" placeholder="Total (1100)">
+      </div>
+    </div>
 
-</div>
+    <div class="input-group">
+      <label id="lblTest">Entry Test Marks (50% Weightage):</label>
+      <div class="input-row">
+        <input type="number" id="obtTest" placeholder="Obtained">
+        <input type="number" id="totTest" placeholder="Total (200)">
+      </div>
+    </div>
 
-<script>
-    function calculate() {
-        // Matric
-        const mObt = parseFloat(document.getElementById('matricObtained').value) || 0;
-        const mTot = parseFloat(document.getElementById('matricTotal').value) || 1;
-        
-        // FSc
-        const fObt = parseFloat(document.getElementById('fscObtained').value) || 0;
-        const fTot = parseFloat(document.getElementById('fscTotal').value) || 1;
-        
-        // Entry Test
-        const tObt = parseFloat(document.getElementById('testObtained').value) || 0;
-        const tTot = parseFloat(document.getElementById('testTotal').value) || 1;
+    <button class="btn-calc" onclick="calculateAggregate()">Calculate Aggregate & Eligibility</button>
+  </div>
 
-        // Calculate Weighted Score (10% Matric, 40% FSc, 50% Entry Test)
-        const matricScore = (mObt / mTot) * 10;
-        const fscScore = (fObt / fTot) * 40;
-        const testScore = (tObt / tTot) * 50;
+  <!-- POPUP RESULT MODAL -->
+  <div class="modal-overlay" id="resultModal">
+    <div class="modal-box">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h3>University Eligibility Result</h3>
+      <div>Calculated Aggregate:</div>
+      <div class="badge-percent" id="displayAggregate">0.00%</div>
+      <div class="merit-tier" id="meritTier"></div>
 
-        const totalAggregate = matricScore + fscScore + testScore;
+      <p style="color: #7f8c8d; font-size: 13px;">Based on official closing merit trends, you can apply for:</p>
 
-        document.getElementById('finalResult').innerText = totalAggregate.toFixed(2) + '%';
+      <ul class="course-list" id="courseList"></ul>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // Configuration dictionary for university weightages
+    const testFormulas = {
+      mdcat:       { matric: 0.10, fsc: 0.40, test: 0.50, text: "10% Matric | 40% FSc | 50% MDCAT" },
+      nums:        { matric: 0.10, fsc: 0.40, test: 0.50, text: "10% Matric | 40% FSc | 50% NUMS" },
+      aku:         { matric: 0.10, fsc: 0.40, test: 0.50, text: "10% Matric | 40% FSc | 50% AKU Test" },
+      pharm_d:     { matric: 0.10, fsc: 0.50, test: 0.40, text: "10% Matric | 50% FSc | 40% Test" },
+      ecat:        { matric: 0.10, fsc: 0.60, test: 0.30, text: "10% Matric | 60% FSc | 30% ECAT" },
+      net_engg:    { matric: 0.10, fsc: 0.15, test: 0.75, text: "10% Matric | 15% FSc | 75% NUST NET" },
+      giki:        { matric: 0.10, fsc: 0.15, test: 0.75, text: "10% Matric | 15% FSc | 75% GIKI Test" },
+      pieas:       { matric: 0.15, fsc: 0.25, test: 0.60, text: "15% Matric | 25% FSc | 60% PIEAS Test" },
+      ned:         { matric: 0.10, fsc: 0.40, test: 0.50, text: "10% Matric | 40% FSc | 50% Entry Test" },
+      fast_nu:     { matric: 0.10, fsc: 0.40, test: 0.50, text: "10% Matric | 40% FSc | 50% FAST Test" },
+      pucit:       { matric: 0.10, fsc: 0.50, test: 0.40, text: "10% Matric | 50% FSc | 40% PU Test" },
+      net_cs:      { matric: 0.10, fsc: 0.15, test: 0.75, text: "10% Matric | 15% FSc | 75% NUST NET" },
+      comsats:     { matric: 0.10, fsc: 0.40, test: 0.50, text: "10% Matric | 40% FSc | 50% NTS Test" },
+      lums:        { matric: 0.15, fsc: 0.35, test: 0.50, text: "15% Matric | 35% FSc | 50% LCAT/SAT" },
+      iba:         { matric: 0.10, fsc: 0.30, test: 0.60, text: "10% Matric | 30% FSc | 60% IBA Test" },
+      net_business:{ matric: 0.10, fsc: 0.15, test: 0.75, text: "10% Matric | 15% FSc | 75% NUST NET" },
+      hec_lat:     { matric: 0.10, fsc: 0.40, test: 0.50, text: "10% Matric | 40% FSc | 50% LAT Test" },
+      pu_test:     { matric: 0.10, fsc: 0.50, test: 0.40, text: "10% Matric | 50% FSc | 40% PU Test" },
+      nts_nat:     { matric: 0.10, fsc: 0.40, test: 0.50, text: "10% Matric | 40% FSc | 50% NTS NAT" },
+      uvas_uaf:    { matric: 0.10, fsc: 0.60, test: 0.30, text: "10% Matric | 60% FSc | 30% Entry Test" }
+    };
+
+    // Update weightage display labels when user changes dropdown selection
+    function updateFormula() {
+      const selectedKey = document.getElementById('courseSelect').value;
+      const config = testFormulas[selectedKey] || testFormulas['mdcat'];
+
+      document.getElementById('formulaText').innerText = "Formula: " + config.text;
+      document.getElementById('lblMatric').innerText = `Matric / O-Level Marks (${Math.round(config.matric * 100)}% Weightage):`;
+      document.getElementById('lblFsc').innerText = `FSc / A-Level Marks (${Math.round(config.fsc * 100)}% Weightage):`;
+      document.getElementById('lblTest').innerText = `Entry Test Marks (${Math.round(config.test * 100)}% Weightage):`;
     }
-     function resetForm() { document.querySelectorAll('input').forEach(i => i.value = ''); document.getElementById('finalResult').innerText = '0.00%'; }
 
-</script>
+    // Main calculation function
+    function calculateAggregate() {
+      const selectedKey = document.getElementById('courseSelect').value;
+      const config = testFormulas[selectedKey] || testFormulas['mdcat'];
 
+      const obtM = parseFloat(document.getElementById('obtMatric').value);
+      const totM = parseFloat(document.getElementById('totMatric').value);
+      const obtF = parseFloat(document.getElementById('obtFsc').value);
+      const totF = parseFloat(document.getElementById('totFsc').value);
+      const obtT = parseFloat(document.getElementById('obtTest').value);
+      const totT = parseFloat(document.getElementById('totTest').value);
+
+      // Input Validation
+      if (isNaN(obtM) || isNaN(totM) || isNaN(obtF) || isNaN(totF) || isNaN(obtT) || isNaN(totT)) {
+        alert("Please enter valid marks in all fields.");
+        return;
+      }
+
+      if (obtM > totM || obtF > totF || obtT > totT) {
+        alert("Obtained marks cannot be greater than Total marks.");
+        return;
+      }
+
+      // Calculation Formula
+      const matricScore = (obtM / totM) * (config.matric * 100);
+      const fscScore = (obtF / totF) * (config.fsc * 100);
+      const testScore = (obtT / totT) * (config.test * 100);
+
+      const totalAggregate = (matricScore + fscScore + testScore).toFixed(2);
+      document.getElementById('displayAggregate').innerText = totalAggregate + "%";
+
+      // Render Dynamic Eligibility List
+      const courseListUI = document.getElementById('courseList');
+      const meritTierUI = document.getElementById('meritTier');
+      courseListUI.innerHTML = "";
+
+      let eligibleCourses = [];
+
+      if (totalAggregate >= 85) {
+        meritTierUI.innerText = "🏆 Tier-1 Merit Bracket (Top 5% Candidates)";
+        eligibleCourses = [
+          "🩺 Public Medical & Dental Colleges (KEMU, AIMC, SIMS, DOW, Nishtar)",
+          "💻 Top CS & Software (NUST NET, FAST-NUCES, PUCIT, ITU)",
+          "⚙️ Top Engineering (NUST, ECAT UET Main Campus, GIKI, PIEAS)",
+          "📊 Elite Business Schools (LUMS LCAT, IBA Karachi, NUST BBA)",
+          "💊 Doctor of Pharmacy (Pharm-D) & DPT (Public Universities)",
+          "⚖️ Top Law Colleges (Punjab University Law College - PULC, QAU)"
+        ];
+      } else if (totalAggregate >= 70) {
+        meritTierUI.innerText = "⭐ High Merit Bracket (Competitive Admissions)";
+        eligibleCourses = [
+          "🏥 Private Medical & Dental Colleges (NUMS, CMH, FMH, Private Medical)",
+          "💻 Computer Science & IT (COMSATS, ITU, UCP, UMT, Air, Bahria)",
+          "⚙️ Engineering (UET Sub-Campuses, MUET, ETEA Engineering)",
+          "💊 Pharm-D, DPT & Allied Health Sciences (Private / Semi-Govt)",
+          "📊 BBA & BS Accounting & Finance (FAST, COMSATS, Air, Bahria)",
+          "⚖️ HEC LAT - 5 Year LLB Degree (Public & Private Colleges)",
+          "🌾 Veterinary & Agriculture (UVAS DVM, UAF Agriculture)"
+        ];
+      } else if (totalAggregate >= 60) {
+        meritTierUI.innerText = "👍 Moderate Merit Bracket";
+        eligibleCourses = [
+          "💻 BS CS / Software / AI (Affiliated & Private Universities)",
+          "📊 BBA / BS Commerce / Banking & Finance",
+          "🌾 BS Agriculture, Biotechnology & Food Sciences",
+          "🎨 Fine Arts, Architecture & Graphic Design (NCA, PU CAD)",
+          "📚 BS Psychology, English Literature, Mass Communication",
+          "⚖️ HEC Law Admission Test (LAT) Passed Bracket"
+        ];
+      } else if (totalAggregate >= 50) {
+        meritTierUI.innerText = "✔️ Standard Pass Bracket";
+        eligibleCourses = [
+          "🎓 General BS Degree Programs (Social Sciences, Arts, Languages)",
+          "💼 BBA / BS Commerce (Private / Evening Programs)",
+          "⚖️ HEC LAT (Law Admission Test - Minimum 50% Threshold)",
+          "💻 IT Certification & Foundation Diplomas"
+        ];
+      } else if (totalAggregate >= 45) {
+        meritTierUI.innerText = "⚠️ Minimum Pass Bracket";
+        eligibleCourses = [
+          "🎓 Associate Degree Programs (ADP - 2 Years)",
+          "📚 ADP Arts, Commerce & Basic Computer Applications",
+          "💡 Recommendation: Consider Intermediate Improvement Exams"
+        ];
+      } else {
+        meritTierUI.innerText = "❌ Below Minimum Criteria";
+        eligibleCourses = [
+          "⚠️ Aggregate is below 45% (Minimum criteria for university degree programs).",
+          "💡 Recommended Step: Apply for Intermediate Marks Improvement Exams."
+        ];
+      }
+
+      eligibleCourses.forEach(course => {
+        const li = document.createElement('li');
+        li.innerText = course;
+        courseListUI.appendChild(li);
+      });
+
+      // Open Popup
+      document.getElementById('resultModal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('resultModal').classList.remove('active');
+    }
+
+    // Close modal when clicking outside the box
+    window.onclick = function(event) {
+      const modal = document.getElementById('resultModal');
+      if (event.target == modal) {
+        closeModal();
+      }
+    }
+  </script>
 </body>
 </html>
