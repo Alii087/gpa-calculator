@@ -3,101 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>University Merit & Aggregate Calculator</title>
+  <title>University Merit Calculator - VectaStack HQ</title>
+  
+  <!-- Lottie Animation Engine Player -->
+  <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@latest/dist/dotlottie-wc.js" type="module"></script>
 
-  <!-- CSS STYLES -->
   <style>
-    * {
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+    * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     
+    /* Dark Theme Base Background */
     body {
       margin: 0;
       padding: 20px;
-      background-color: #f39c12; /* Brand Background */
+      background-color: #0f172a; /* Deep Charcoal Blue */
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
+      color: #f8fafc;
     }
 
-    /* Main Container Card */
+    /* Dark Card Container */
     .calc-card {
-      background-color: #ffffff;
+      background-color: #1e293b; /* Slate Dark Box */
       padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      border-radius: 16px;
+      box-shadow: 0 20px 30px rgba(0,0,0,0.5);
       width: 100%;
-      max-width: 480px;
+      max-width: 440px;
       text-align: center;
+      border: 1px solid #334155;
     }
 
     .calc-card h2 {
       margin-top: 0;
-      color: #2c3e50;
+      color: #f8fafc;
       font-size: 24px;
+      font-weight: 700;
       margin-bottom: 20px;
     }
 
-    /* Custom Dropdown Styling */
-    .select-label {
-      display: block;
-      text-align: left;
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: #34495e;
-      font-size: 13px;
-    }
-
-    .custom-select {
-      width: 100%;
-      padding: 12px;
-      font-size: 14px;
-      font-weight: 600;
-      color: #ffffff;
-      background-color: #2c3e50;
-      border: none;
-      border-radius: 6px;
-      margin-bottom: 12px;
-      outline: none;
-      cursor: pointer;
-    }
-
-    .custom-select optgroup {
-      background-color: #1a252f;
-      color: #f1c40f;
-      font-weight: bold;
-    }
-
-    .custom-select option {
-      background-color: #2c3e50;
-      color: #ffffff;
-    }
-
-    .formula-badge {
-      display: block;
-      background: #eef2f5;
-      color: #2c3e50;
-      padding: 8px 12px;
-      border-radius: 6px;
-      font-size: 12px;
-      font-weight: bold;
-      margin-bottom: 20px;
-      border: 1px solid #dcdde1;
-    }
-
-    /* Form Fields */
     .input-group {
-      margin-bottom: 15px;
+      margin-bottom: 16px;
       text-align: left;
     }
 
     .input-group label {
       display: block;
       font-weight: 600;
-      margin-bottom: 5px;
-      color: #34495e;
+      margin-bottom: 6px;
+      color: #94a3b8;
       font-size: 13px;
     }
 
@@ -108,44 +63,116 @@
 
     .input-row input {
       width: 50%;
-      padding: 10px;
-      border: 2px solid #bdc3c7;
-      border-radius: 6px;
-      font-size: 14px;
+      padding: 12px;
+      background-color: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      font-size: 15px;
+      color: #f8fafc;
       outline: none;
-      transition: border-color 0.2s;
+      transition: all 0.2s;
     }
 
     .input-row input:focus {
-      border-color: #2c3e50;
+      border-color: #38bdf8;
+      box-shadow: 0 0 8px rgba(56, 189, 248, 0.3);
     }
 
+    .custom-select {
+      width: 100%;
+      padding: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #f8fafc;
+      background-color: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .custom-select:focus {
+      border-color: #38bdf8;
+    }
+
+    .formula-badge {
+      display: block;
+      background: #0f172a;
+      color: #38bdf8;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 18px;
+      border: 1px solid #334155;
+      line-height: 1.4;
+    }
+
+    /* Primary Action Button */
     .btn-calc {
       width: 100%;
       padding: 14px;
-      background-color: #2c3e50;
+      background: linear-gradient(135deg, #0284c7, #0369a1);
       color: #ffffff;
       border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      font-weight: bold;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
       cursor: pointer;
+      transition: all 0.2s ease;
       margin-top: 10px;
-      transition: background-color 0.2s;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
     }
 
     .btn-calc:hover {
-      background-color: #1a252f;
+      background: linear-gradient(135deg, #0369a1, #075985);
     }
 
-    /* Modal Popup Styling */
+    /* Dark Reset Button */
+    .btn-reset {
+      width: 100%;
+      padding: 12px;
+      background-color: #334155;
+      color: #cbd5e1;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      margin-top: 10px;
+    }
+
+    .btn-reset:hover {
+      background-color: #475569;
+      color: #ffffff;
+    }
+
+    /* Brand Footer */
+    .brand-footer {
+      margin-top: 22px;
+      font-size: 12px;
+      color: #64748b;
+      font-weight: 600;
+      border-top: 1px solid #334155;
+      padding-top: 12px;
+    }
+
+    .brand-footer span {
+      color: #38bdf8;
+      font-weight: 700;
+    }
+
+    /* Modal Popup Overlay Dark */
     .modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(4px);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -161,21 +188,21 @@
     }
 
     .modal-box {
-      background: #ffffff;
+      background: #1e293b;
+      border: 1px solid #334155;
       padding: 25px;
-      border-radius: 12px;
+      border-radius: 16px;
       width: 90%;
-      max-width: 500px;
-      max-height: 85vh;
-      overflow-y: auto;
+      max-width: 440px;
       text-align: center;
       position: relative;
-      animation: popup 0.3s ease-out;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
     }
 
-    @keyframes popup {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+    .modal-box h3 {
+      color: #f8fafc;
+      margin-top: 0;
+      margin-bottom: 5px;
     }
 
     .close-btn {
@@ -184,270 +211,263 @@
       right: 20px;
       font-size: 24px;
       font-weight: bold;
-      color: #7f8c8d;
+      color: #64748b;
       cursor: pointer;
     }
 
-    .close-btn:hover { color: #e74c3c; }
+    .close-btn:hover { color: #ef4444; }
 
-    .modal-box h3 {
-      margin-top: 0;
-      color: #2c3e50;
-      font-size: 22px;
+    /* Animated Character Container Styling */
+    .animation-wrapper {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 10px auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .badge-percent {
       display: inline-block;
-      background-color: #27ae60;
-      color: #ffffff;
       padding: 6px 18px;
       border-radius: 20px;
       font-size: 22px;
       font-weight: bold;
-      margin: 10px 0;
+      margin: 8px 0;
+    }
+
+    .badge-pass {
+      background-color: #10b981;
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+    }
+
+    .badge-fail {
+      background-color: #ef4444;
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);
     }
 
     .merit-tier {
       font-size: 13px;
-      color: #e67e22;
       font-weight: bold;
       margin-bottom: 12px;
     }
 
     .course-list {
       text-align: left;
-      margin-top: 15px;
+      margin-top: 12px;
       padding-left: 0;
       list-style: none;
     }
 
     .course-list li {
-      background: #f8f9fa;
-      padding: 10px 14px;
+      background: #0f172a;
+      padding: 10px 12px;
       margin-bottom: 8px;
-      border-left: 4px solid #27ae60;
-      border-radius: 4px;
+      border-left: 4px solid #38bdf8;
+      border-radius: 6px;
       font-weight: 600;
-      color: #2c3e50;
+      color: #e2e8f0;
       font-size: 13px;
     }
   </style>
 </head>
 <body>
 
-  <!-- CALCULATOR UI -->
   <div class="calc-card">
     <h2>University Merit Calculator</h2>
-
-    <span class="select-label">Select Target Course / University Test:</span>
-    <select id="courseSelect" class="custom-select" onchange="updateFormula()">
-      <optgroup label="🩺 Medical & Health Sciences">
-        <option value="mdcat" selected>MDCAT (Public MBBS / BDS)</option>
-        <option value="nums">NUMS Medical Test</option>
-        <option value="aku">Aga Khan University (AKU)</option>
-        <option value="pharm_d">Pharm-D / DPT / Allied Health</option>
-      </optgroup>
-
-      <optgroup label="⚙️ Engineering & Tech">
-        <option value="ecat">ECAT (UET Lahore / Punjab)</option>
-        <option value="net_engg">NET (NUST Engineering)</option>
-        <option value="giki">GIKI Entrance Test</option>
-        <option value="pieas">PIEAS Admission Test</option>
-        <option value="ned">NED Karachi / MUET / ETEA</option>
-      </optgroup>
-
-      <optgroup label="💻 Computing & IT">
-        <option value="fast_nu">FAST-NUCES (CS / SE / AI)</option>
-        <option value="pucit">PUCIT / FCIT Punjab University</option>
-        <option value="net_cs">NET (NUST Computing)</option>
-        <option value="comsats">COMSATS (NTS-NAT)</option>
-      </optgroup>
-
-      <optgroup label="📊 Business & Law">
-        <option value="lums">LUMS (LCAT / SAT / ACT)</option>
-        <option value="iba">IBA Karachi Test</option>
-        <option value="net_business">NUST NET (Business & Social Sciences)</option>
-        <option value="hec_lat">HEC LAT (Law Admission Test)</option>
-      </optgroup>
-
-      <optgroup label="🎓 General & Others">
-        <option value="pu_test">Punjab University Test (PU-Test)</option>
-        <option value="nts_nat">NTS NAT (General Universities)</option>
-        <option value="uvas_uaf">UVAS / UAF (Veterinary & Agriculture)</option>
-      </optgroup>
-    </select>
-
-    <div class="formula-badge" id="formulaText">Formula: 10% Matric | 40% FSc | 50% Entry Test</div>
-
-    <!-- MARKS INPUT FIELDS -->
+    
     <div class="input-group">
-      <label id="lblMatric">Matric / O-Level Marks (10% Weightage):</label>
+      <label for="courseSelect">Select Target Course / University Test:</label>
+      <select id="courseSelect" class="custom-select" onchange="updateFormula()">
+        <option value="pieas">PIEAS Admission Test</option>
+        <option value="mdcat">MDCAT Medical</option>
+        <option value="ecat">ECAT UET Engineering</option>
+        <option value="nust">NUST NET Test</option>
+        <option value="fast">FAST-NUCES CS Test</option>
+        <option value="comsats">COMSATS NTS-NAT</option>
+      </select>
+    </div>
+
+    <div class="formula-badge" id="formulaText">
+      Formula: 15% Matric | 25% FSc | 60% PIEAS Test
+    </div>
+
+    <!-- Matric Inputs -->
+    <div class="input-group">
+      <label id="lblMatric">Matric / O-Level Marks (15% Weightage):</label>
       <div class="input-row">
         <input type="number" id="obtMatric" placeholder="Obtained">
-        <input type="number" id="totMatric" placeholder="Total (1100)">
+        <input type="number" id="totMatric" placeholder="Total">
       </div>
     </div>
 
+    <!-- FSc Inputs -->
     <div class="input-group">
-      <label id="lblFsc">FSc / A-Level Marks (40% Weightage):</label>
+      <label id="lblFsc">FSc / A-Level Marks (25% Weightage):</label>
       <div class="input-row">
         <input type="number" id="obtFsc" placeholder="Obtained">
-        <input type="number" id="totFsc" placeholder="Total (1100)">
+        <input type="number" id="totFsc" placeholder="Total">
       </div>
     </div>
 
+    <!-- Entry Test Inputs -->
     <div class="input-group">
-      <label id="lblTest">Entry Test Marks (50% Weightage):</label>
+      <label id="lblTest">Entry Test Marks (60% Weightage):</label>
       <div class="input-row">
         <input type="number" id="obtTest" placeholder="Obtained">
-        <input type="number" id="totTest" placeholder="Total (200)">
+        <input type="number" id="totTest" placeholder="Total">
       </div>
     </div>
 
+    <!-- Main Action Button -->
     <button class="btn-calc" onclick="calculateAggregate()">Calculate Aggregate & Eligibility</button>
+
+    <!-- Reset Button -->
+    <button class="btn-reset" onclick="resetForm()">Reset Form</button>
+
+    <!-- Brand Footer -->
+    <div class="brand-footer">
+      Powered by <span>VectaStack HQ</span>
+    </div>
   </div>
 
-  <!-- POPUP RESULT MODAL -->
+  <!-- Popup Result Modal -->
   <div class="modal-overlay" id="resultModal">
     <div class="modal-box">
       <span class="close-btn" onclick="closeModal()">&times;</span>
-      <h3>University Eligibility Result</h3>
-      <div>Calculated Aggregate:</div>
-      <div class="badge-percent" id="displayAggregate">0.00%</div>
+      
+      <!-- Dynamic Animated Character Render Slot -->
+      <div class="animation-wrapper" id="animationSlot"></div>
+
+      <h3 id="modalTitle">University Eligibility Result</h3>
+      <div style="color: #94a3b8; font-size: 13px;">Calculated Aggregate:</div>
+      <div class="badge-percent" id="displayPercent">0.00%</div>
       <div class="merit-tier" id="meritTier"></div>
 
-      <p style="color: #7f8c8d; font-size: 13px;">Based on official closing merit trends, you can apply for:</p>
-
+      <p style="color: #94a3b8; font-size: 12px; margin-bottom: 8px;" id="subtitleText">Based on official closing merit trends, you can apply for:</p>
+      
       <ul class="course-list" id="courseList"></ul>
     </div>
   </div>
 
-  <!-- JAVASCRIPT LOGIC -->
   <script>
-    // Configuration dictionary for university weightages
-    const testFormulas = {
-      mdcat:       { matric: 0.10, fsc: 0.40, test: 0.50, text: "10% Matric | 40% FSc | 50% MDCAT" },
-      nums:        { matric: 0.10, fsc: 0.40, test: 0.50, text: "10% Matric | 40% FSc | 50% NUMS" },
-      aku:         { matric: 0.10, fsc: 0.40, test: 0.50, text: "10% Matric | 40% FSc | 50% AKU Test" },
-      pharm_d:     { matric: 0.10, fsc: 0.50, test: 0.40, text: "10% Matric | 50% FSc | 40% Test" },
-      ecat:        { matric: 0.10, fsc: 0.60, test: 0.30, text: "10% Matric | 60% FSc | 30% ECAT" },
-      net_engg:    { matric: 0.10, fsc: 0.15, test: 0.75, text: "10% Matric | 15% FSc | 75% NUST NET" },
-      giki:        { matric: 0.10, fsc: 0.15, test: 0.75, text: "10% Matric | 15% FSc | 75% GIKI Test" },
-      pieas:       { matric: 0.15, fsc: 0.25, test: 0.60, text: "15% Matric | 25% FSc | 60% PIEAS Test" },
-      ned:         { matric: 0.10, fsc: 0.40, test: 0.50, text: "10% Matric | 40% FSc | 50% Entry Test" },
-      fast_nu:     { matric: 0.10, fsc: 0.40, test: 0.50, text: "10% Matric | 40% FSc | 50% FAST Test" },
-      pucit:       { matric: 0.10, fsc: 0.50, test: 0.40, text: "10% Matric | 50% FSc | 40% PU Test" },
-      net_cs:      { matric: 0.10, fsc: 0.15, test: 0.75, text: "10% Matric | 15% FSc | 75% NUST NET" },
-      comsats:     { matric: 0.10, fsc: 0.40, test: 0.50, text: "10% Matric | 40% FSc | 50% NTS Test" },
-      lums:        { matric: 0.15, fsc: 0.35, test: 0.50, text: "15% Matric | 35% FSc | 50% LCAT/SAT" },
-      iba:         { matric: 0.10, fsc: 0.30, test: 0.60, text: "10% Matric | 30% FSc | 60% IBA Test" },
-      net_business:{ matric: 0.10, fsc: 0.15, test: 0.75, text: "10% Matric | 15% FSc | 75% NUST NET" },
-      hec_lat:     { matric: 0.10, fsc: 0.40, test: 0.50, text: "10% Matric | 40% FSc | 50% LAT Test" },
-      pu_test:     { matric: 0.10, fsc: 0.50, test: 0.40, text: "10% Matric | 50% FSc | 40% PU Test" },
-      nts_nat:     { matric: 0.10, fsc: 0.40, test: 0.50, text: "10% Matric | 40% FSc | 50% NTS NAT" },
-      uvas_uaf:    { matric: 0.10, fsc: 0.60, test: 0.30, text: "10% Matric | 60% FSc | 30% Entry Test" }
+    const formulas = {
+      pieas:   { matric: 0.15, fsc: 0.25, test: 0.60, name: "PIEAS Test" },
+      mdcat:   { matric: 0.10, fsc: 0.40, test: 0.50, name: "MDCAT Test" },
+      ecat:    { matric: 0.10, fsc: 0.60, test: 0.30, name: "ECAT Test" },
+      nust:    { matric: 0.10, fsc: 0.15, test: 0.75, name: "NET Test" },
+      fast:    { matric: 0.10, fsc: 0.40, test: 0.50, name: "FAST Test" },
+      comsats: { matric: 0.10, fsc: 0.40, test: 0.50, name: "NTS Test" }
     };
 
-    // Update weightage display labels when user changes dropdown selection
-    function updateFormula() {
-      const selectedKey = document.getElementById('courseSelect').value;
-      const config = testFormulas[selectedKey] || testFormulas['mdcat'];
+    // Vector Lottie Animation CDN Sources
+    const HAPPY_ANIMATION = "https://assets2.lottiefiles.com/packages/lf20_tou3y0bu.json"; // Happy celebrating trophy/character
+    const SAD_ANIMATION = "https://assets10.lottiefiles.com/packages/lf20_k239m99a.json";   <!-- Sad apologizing cartoon -->
 
-      document.getElementById('formulaText').innerText = "Formula: " + config.text;
-      document.getElementById('lblMatric').innerText = `Matric / O-Level Marks (${Math.round(config.matric * 100)}% Weightage):`;
-      document.getElementById('lblFsc').innerText = `FSc / A-Level Marks (${Math.round(config.fsc * 100)}% Weightage):`;
-      document.getElementById('lblTest').innerText = `Entry Test Marks (${Math.round(config.test * 100)}% Weightage):`;
+    function updateFormula() {
+      const selected = document.getElementById('courseSelect').value;
+      const config = formulas[selected];
+
+      const mPct = (config.matric * 100);
+      const fPct = (config.fsc * 100);
+      const tPct = (config.test * 100);
+
+      document.getElementById('formulaText').innerText = `Formula: ${mPct}% Matric | ${fPct}% FSc | ${tPct}% ${config.name}`;
+      document.getElementById('lblMatric').innerText = `Matric / O-Level Marks (${mPct}% Weightage):`;
+      document.getElementById('lblFsc').innerText = `FSc / A-Level Marks (${fPct}% Weightage):`;
+      document.getElementById('lblTest').innerText = `Entry Test Marks (${tPct}% Weightage):`;
     }
 
-    // Main calculation function
     function calculateAggregate() {
-      const selectedKey = document.getElementById('courseSelect').value;
-      const config = testFormulas[selectedKey] || testFormulas['mdcat'];
+      const selected = document.getElementById('courseSelect').value;
+      const config = formulas[selected];
 
-      const obtM = parseFloat(document.getElementById('obtMatric').value);
-      const totM = parseFloat(document.getElementById('totMatric').value);
-      const obtF = parseFloat(document.getElementById('obtFsc').value);
-      const totF = parseFloat(document.getElementById('totFsc').value);
-      const obtT = parseFloat(document.getElementById('obtTest').value);
-      const totT = parseFloat(document.getElementById('totTest').value);
+      const obtM = parseFloat(document.getElementById('obtMatric').value) || 0;
+      const totM = parseFloat(document.getElementById('totMatric').value) || 1;
 
-      // Input Validation
-      if (isNaN(obtM) || isNaN(totM) || isNaN(obtF) || isNaN(totF) || isNaN(obtT) || isNaN(totT)) {
-        alert("Please enter valid marks in all fields.");
-        return;
-      }
+      const obtF = parseFloat(document.getElementById('obtFsc').value) || 0;
+      const totF = parseFloat(document.getElementById('totFsc').value) || 1;
 
-      if (obtM > totM || obtF > totF || obtT > totT) {
-        alert("Obtained marks cannot be greater than Total marks.");
-        return;
-      }
+      const obtT = parseFloat(document.getElementById('obtTest').value) || 0;
+      const totT = parseFloat(document.getElementById('totTest').value) || 1;
 
-      // Calculation Formula
-      const matricScore = (obtM / totM) * (config.matric * 100);
-      const fscScore = (obtF / totF) * (config.fsc * 100);
-      const testScore = (obtT / totT) * (config.test * 100);
+      const matricPart = (obtM / totM) * (config.matric * 100);
+      const fscPart = (obtF / totF) * (config.fsc * 100);
+      const testPart = (obtT / totT) * (config.test * 100);
 
-      const totalAggregate = (matricScore + fscScore + testScore).toFixed(2);
-      document.getElementById('displayAggregate').innerText = totalAggregate + "%";
+      const percentage = (matricPart + fscPart + testPart).toFixed(2);
+      
+      const displayBadge = document.getElementById('displayPercent');
+      displayBadge.innerText = percentage + "%";
 
-      // Render Dynamic Eligibility List
       const courseListUI = document.getElementById('courseList');
       const meritTierUI = document.getElementById('meritTier');
+      const animationSlot = document.getElementById('animationSlot');
+      const modalTitle = document.getElementById('modalTitle');
+      
       courseListUI.innerHTML = "";
 
       let eligibleCourses = [];
 
-      if (totalAggregate >= 85) {
-        meritTierUI.innerText = "🏆 Tier-1 Merit Bracket (Top 5% Candidates)";
-        eligibleCourses = [
-          "🩺 Public Medical & Dental Colleges (KEMU, AIMC, SIMS, DOW, Nishtar)",
-          "💻 Top CS & Software (NUST NET, FAST-NUCES, PUCIT, ITU)",
-          "⚙️ Top Engineering (NUST, ECAT UET Main Campus, GIKI, PIEAS)",
-          "📊 Elite Business Schools (LUMS LCAT, IBA Karachi, NUST BBA)",
-          "💊 Doctor of Pharmacy (Pharm-D) & DPT (Public Universities)",
-          "⚖️ Top Law Colleges (Punjab University Law College - PULC, QAU)"
-        ];
-      } else if (totalAggregate >= 70) {
-        meritTierUI.innerText = "⭐ High Merit Bracket (Competitive Admissions)";
-        eligibleCourses = [
-          "🏥 Private Medical & Dental Colleges (NUMS, CMH, FMH, Private Medical)",
-          "💻 Computer Science & IT (COMSATS, ITU, UCP, UMT, Air, Bahria)",
-          "⚙️ Engineering (UET Sub-Campuses, MUET, ETEA Engineering)",
-          "💊 Pharm-D, DPT & Allied Health Sciences (Private / Semi-Govt)",
-          "📊 BBA & BS Accounting & Finance (FAST, COMSATS, Air, Bahria)",
-          "⚖️ HEC LAT - 5 Year LLB Degree (Public & Private Colleges)",
-          "🌾 Veterinary & Agriculture (UVAS DVM, UAF Agriculture)"
-        ];
-      } else if (totalAggregate >= 60) {
-        meritTierUI.innerText = "👍 Moderate Merit Bracket";
-        eligibleCourses = [
-          "💻 BS CS / Software / AI (Affiliated & Private Universities)",
-          "📊 BBA / BS Commerce / Banking & Finance",
-          "🌾 BS Agriculture, Biotechnology & Food Sciences",
-          "🎨 Fine Arts, Architecture & Graphic Design (NCA, PU CAD)",
-          "📚 BS Psychology, English Literature, Mass Communication",
-          "⚖️ HEC Law Admission Test (LAT) Passed Bracket"
-        ];
-      } else if (totalAggregate >= 50) {
-        meritTierUI.innerText = "✔️ Standard Pass Bracket";
-        eligibleCourses = [
-          "🎓 General BS Degree Programs (Social Sciences, Arts, Languages)",
-          "💼 BBA / BS Commerce (Private / Evening Programs)",
-          "⚖️ HEC LAT (Law Admission Test - Minimum 50% Threshold)",
-          "💻 IT Certification & Foundation Diplomas"
-        ];
-      } else if (totalAggregate >= 45) {
-        meritTierUI.innerText = "⚠️ Minimum Pass Bracket";
-        eligibleCourses = [
-          "🎓 Associate Degree Programs (ADP - 2 Years)",
-          "📚 ADP Arts, Commerce & Basic Computer Applications",
-          "💡 Recommendation: Consider Intermediate Improvement Exams"
-        ];
+      // Determine Eligibility & Render Character
+      if (percentage >= 45) {
+        // PASS STATE (Happy Character)
+        displayBadge.className = "badge-percent badge-pass";
+        modalTitle.innerText = "Congratulations! 🎉";
+        modalTitle.style.color = "#10b981";
+
+        animationSlot.innerHTML = `<dotlottie-wc src="${HAPPY_ANIMATION}" speed="1" style="width: 130px; height: 130px;" mode="forward" loop autoplay></dotlottie-wc>`;
+
+        if (percentage >= 85) {
+          meritTierUI.innerText = "🏆 Tier-1 Merit Bracket";
+          meritTierUI.style.color = "#f59e0b";
+          eligibleCourses = [
+            "🩺 Public Medical & Dental Colleges (KEMU, AIMC, SIMS, Dow)",
+            "💻 Top Computer Science & Software (NUST NET, FAST, PUCIT, ITU)",
+            "⚙️ Top Engineering (PIEAS, NUST, ECAT UET Main Campus, GIKI)",
+            "📊 Elite Business Schools (LUMS, IBA Karachi, NUST BBA)"
+          ];
+        } else if (percentage >= 70) {
+          meritTierUI.innerText = "⭐ High Merit Bracket";
+          meritTierUI.style.color = "#38bdf8";
+          eligibleCourses = [
+            "🏥 Private Medical & Dental Colleges (NUMS, CMH, FMH)",
+            "💻 Computer Science & IT (COMSATS, ITU, UCP, UMT, Air, Bahria)",
+            "⚙️ Engineering (UET Sub-Campuses, ETEA Engineering)",
+            "💊 Pharm-D, DPT & Allied Health Sciences"
+          ];
+        } else if (percentage >= 60) {
+          meritTierUI.innerText = "👍 Moderate Merit Bracket";
+          meritTierUI.style.color = "#a855f7";
+          eligibleCourses = [
+            "💻 BS CS / Software / AI (Affiliated & Private Colleges)",
+            "📊 BBA / BS Commerce / Banking & Finance",
+            "🌾 BS Agriculture, Biotechnology & Food Sciences"
+          ];
+        } else {
+          meritTierUI.innerText = "✔️ Standard Pass Bracket";
+          meritTierUI.style.color = "#10b981";
+          eligibleCourses = [
+            "🎓 General BS Degree Programs (BS Social Sciences, Arts)",
+            "💼 BBA / BS Commerce (Private / Evening Programs)",
+            "🎓 Associate Degree Programs (ADP - 2 Years)"
+          ];
+        }
       } else {
-        meritTierUI.innerText = "❌ Below Minimum Criteria";
+        // FAIL STATE (Sad Apologetic Cartoon Character)
+        displayBadge.className = "badge-percent badge-fail";
+        modalTitle.innerText = "We're Sorry... 😔";
+        modalTitle.style.color = "#ef4444";
+        meritTierUI.innerText = "❌ Below Minimum 45% Threshold";
+        meritTierUI.style.color = "#ef4444";
+
+        animationSlot.innerHTML = `<dotlottie-wc src="${SAD_ANIMATION}" speed="1" style="width: 130px; height: 130px;" mode="forward" loop autoplay></dotlottie-wc>`;
+
         eligibleCourses = [
-          "⚠️ Aggregate is below 45% (Minimum criteria for university degree programs).",
-          "💡 Recommended Step: Apply for Intermediate Marks Improvement Exams."
+          "⚠️ Aggregate score is below the 45% minimum criteria for degree admissions.",
+          "💡 Recommended Step: Apply for Intermediate Marks Improvement Exams to increase your score."
         ];
       }
 
@@ -457,15 +477,23 @@
         courseListUI.appendChild(li);
       });
 
-      // Open Popup
       document.getElementById('resultModal').classList.add('active');
+    }
+
+    function resetForm() {
+      document.getElementById('obtMatric').value = '';
+      document.getElementById('totMatric').value = '';
+      document.getElementById('obtFsc').value = '';
+      document.getElementById('totFsc').value = '';
+      document.getElementById('obtTest').value = '';
+      document.getElementById('totTest').value = '';
+      document.getElementById('displayPercent').innerText = '0.00%';
     }
 
     function closeModal() {
       document.getElementById('resultModal').classList.remove('active');
     }
 
-    // Close modal when clicking outside the box
     window.onclick = function(event) {
       const modal = document.getElementById('resultModal');
       if (event.target == modal) {
@@ -473,5 +501,6 @@
       }
     }
   </script>
+
 </body>
 </html>
